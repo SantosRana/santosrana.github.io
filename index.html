@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Santosh Rana - ML & Data Science Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <nav class="nav">
+    <span class="nav-logo">SR.</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li>
+        <a class="nav-github" href="https://github.com/ranasantosh" target="_blank" rel="noopener">
+          GitHub ->
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-noise"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Machine Learning . Computer Vision . NLP</p>
+      <h1 class="hero-name">
+        Santosh<br />
+        <em>Rana</em>
+      </h1>
+      <p class="hero-tagline">
+        I build intelligent systems, from real-time computer vision pipelines to multilingual NLP models,
+        with a focus on practical performance, interpretability, and deployment.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">scroll down</div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="container two-col">
+      <div class="section-label">01 / About</div>
+      <div class="about-body">
+        <h2 class="section-title">
+          Building ML systems that work in the <em>real world</em>
+        </h2>
+        <p>
+          Hi, I'm Santosh, a Machine Learning and Data Science engineer focused on turning strong model ideas
+          into systems that can actually run in production.
+        </p>
+        <p>
+          My recent work spans landmark-based computer vision, multilingual aspect-based sentiment analysis,
+          and real-time inference pipelines built for practical use instead of benchmark-only demos.
+        </p>
+        <p>
+          I care about efficient architectures, clean preprocessing, honest evaluation, and the details that
+          make ML systems stable outside the notebook.
+        </p>
+        <a href="https://github.com/ranasantosh" class="inline-link" target="_blank" rel="noopener">
+          Explore my GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark" id="projects">
+    <div class="container">
+      <div class="section-label light">02 / Projects</div>
+      <h2 class="section-title light">Selected work across <em>vision</em> and <em>language</em></h2>
+
+      <div class="projects-grid">
+        <article class="project-card">
+          <div class="project-num">PROJECT 001</div>
+          <h3 class="project-title">Real-Time Multimodal CV System</h3>
+          <p class="project-desc">
+            A dual-pipeline webcam system combining hand gesture recognition and facial emotion recognition
+            using MediaPipe landmarks, a lightweight MLP, and a GCN-based facial classifier.
+          </p>
+          <div class="project-highlights">
+            <div class="highlight-item">
+              <span class="highlight-val">95%</span>
+              <span class="highlight-label">Gesture Accuracy</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-val">20-30</span>
+              <span class="highlight-label">FPS Live</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-val">19K</span>
+              <span class="highlight-label">MLP Params</span>
+            </div>
+          </div>
+          <div class="project-detail">
+            <strong>Focus:</strong> Landmark-driven real-time interaction without heavy CNN pipelines,
+            including dynamic wave detection and geometry-aware facial emotion modeling.
+          </div>
+          <div class="project-tags">
+            <span>PyTorch</span>
+            <span>MediaPipe</span>
+            <span>GCN</span>
+            <span>OpenCV</span>
+            <span>Computer Vision</span>
+          </div>
+          <div class="project-links">
+            <a href="project-multimodal-cv.html">Open Project</a>
+            <a href="https://github.com/ranasantosh" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-num">PROJECT 002</div>
+          <h3 class="project-title">Korean ABSA Benchmark</h3>
+          <p class="project-desc">
+            An end-to-end benchmark for Korean aspect-based sentiment analysis across restaurant reviews,
+            comparing multiple modeling strategies for mention and sentiment extraction.
+          </p>
+          <div class="project-highlights">
+            <div class="highlight-item">
+              <span class="highlight-val">0.94</span>
+              <span class="highlight-label">Mention F1</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-val">3</span>
+              <span class="highlight-label">Models Tested</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-val">4</span>
+              <span class="highlight-label">Aspects</span>
+            </div>
+          </div>
+          <div class="project-detail">
+            <strong>Focus:</strong> Benchmarking Korean-language transformers and prompt-based approaches
+            for FOOD, PRICE, SERVICE, and AMBIENCE sentiment understanding.
+          </div>
+          <div class="project-tags">
+            <span>NLP</span>
+            <span>KcELECTRA</span>
+            <span>Qwen</span>
+            <span>Benchmarking</span>
+            <span>Korean</span>
+          </div>
+          <div class="project-links">
+            <a href="project-korean-absa.html">Open Project</a>
+            <a href="https://github.com/ranasantosh" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-accent" id="skills">
+    <div class="container two-col">
+      <div class="section-label">03 / Skills</div>
+      <div>
+        <h2 class="section-title">Core stack for research, training, and deployment</h2>
+        <div class="skills-grid">
+          <div class="skill-group">
+            <h4>ML Engineering</h4>
+            <ul>
+              <li>PyTorch</li>
+              <li>PyTorch Geometric</li>
+              <li>Scikit-learn</li>
+              <li>Model evaluation</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h4>Computer Vision</h4>
+            <ul>
+              <li>OpenCV</li>
+              <li>MediaPipe</li>
+              <li>Landmark pipelines</li>
+              <li>Real-time inference</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h4>Natural Language</h4>
+            <ul>
+              <li>Transformers</li>
+              <li>Aspect sentiment analysis</li>
+              <li>Benchmark design</li>
+              <li>Prompt evaluation</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h4>Workflow</h4>
+            <ul>
+              <li>Python</li>
+              <li>Data preprocessing</li>
+              <li>Experiment tracking</li>
+              <li>Deployment-minded prototyping</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="contact-inner">
+        <div class="section-label">04 / Contact</div>
+        <h2 class="section-title">Let's build something useful</h2>
+        <p class="contact-sub">
+          If you want to discuss ML systems, research implementation, or practical deployment work,
+          I'm happy to connect.
+        </p>
+        <a href="mailto:hello@santoshrana.dev" class="btn btn-dark">Email Me</a>
+        <div class="contact-links">
+          <a href="https://github.com/ranasantosh" target="_blank" rel="noopener">GitHub</a>
+          <a href="project-multimodal-cv.html">CV Project</a>
+          <a href="project-korean-absa.html">ABSA Project</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span>Santosh Rana Portfolio</span>
+    <span>ML . CV . NLP</span>
+  </footer>
+</body>
+</html>

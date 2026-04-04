@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Korean ABSA Benchmark | Project Showcase</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg-dark: #0a0a0a;
+      --bg-card: #111111;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0a0;
+      --accent: #ff6b6b;
+      --accent-secondary: #4ecdc4;
+      --border: #222222;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 10, 10, 0.9);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 3rem 4rem;
+      position: relative;
+      background: linear-gradient(135deg, var(--bg-dark) 0%, #1a0f0f 100%);
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 107, 107, 0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .project-label {
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.03em;
+      max-width: 900px;
+    }
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin-bottom: 3rem;
+    }
+    .hero-stats { display: flex; gap: 3rem; margin-top: 2rem; flex-wrap: wrap; }
+    .stat { display: flex; flex-direction: column; }
+    .stat-value { font-size: 2.5rem; font-weight: 800; color: var(--accent); line-height: 1; }
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-top: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .section { padding: 6rem 3rem; max-width: 1200px; margin: 0 auto; }
+    .section-title { font-size: 2rem; font-weight: 700; margin-bottom: 2rem; color: var(--text-primary); }
+    .section-dark { background: var(--bg-card); max-width: none; }
+    .models-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin: 3rem 0; }
+    .model-card {
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .model-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+    .model-card.featured {
+      border-color: var(--accent);
+      background: linear-gradient(135deg, rgba(255, 107, 107, 0.05) 0%, transparent 100%);
+    }
+    .model-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--accent);
+      color: var(--bg-dark);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .model-card h3 { font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary); }
+    .model-meta { font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1.5rem; }
+    .model-metrics { display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; }
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .metric-name { font-size: 0.875rem; color: var(--text-secondary); }
+    .metric-value { font-weight: 700; color: var(--accent); }
+    .model-desc { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-top: 1rem; }
+    .aspects-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 2rem 0; }
+    .aspect-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    .aspect-pill:hover {
+      background: rgba(255, 107, 107, 0.1);
+      border-color: var(--accent);
+      transform: scale(1.05);
+    }
+    .tech-stack { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 2rem 0; }
+    .tech-tag {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      transition: all 0.3s;
+    }
+    .tech-tag:hover {
+      background: rgba(255, 107, 107, 0.1);
+      border-color: var(--accent);
+      color: var(--text-primary);
+    }
+    .detail-block {
+      background: var(--bg-dark);
+      border-left: 3px solid var(--accent);
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .detail-block h4 {
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .detail-block p { color: var(--text-secondary); font-size: 0.95rem; }
+    .cta-section {
+      text-align: center;
+      padding: 6rem 3rem;
+      background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-dark) 100%);
+    }
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: var(--bg-dark);
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .cta-button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3); }
+    .footer {
+      padding: 3rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+    @media (max-width: 968px) {
+      .models-grid { grid-template-columns: 1fr; }
+      .aspects-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .nav { padding: 1rem 1.5rem; }
+      .hero { padding: 6rem 1.5rem 3rem; }
+      .hero-stats { flex-direction: column; gap: 1.5rem; }
+      .section { padding: 4rem 1.5rem; }
+      .aspects-grid { grid-template-columns: 1fr; }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-in { animation: fadeInUp 0.8s ease-out forwards; }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-logo">Portfolio</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="project-multimodal-cv.html">CV System</a></li>
+      <li><a href="project-korean-absa.html" class="active">ABSA Benchmark</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="project-label animate-in">Project 002</div>
+    <h1 class="animate-in">Korean ABSA Benchmark</h1>
+    <p class="hero-subtitle animate-in">
+      End-to-end benchmark of three approaches for aspect-based sentiment analysis on Korean restaurant
+      reviews covering FOOD, PRICE, SERVICE, and AMBIENCE.
+    </p>
+    <div class="hero-stats animate-in">
+      <div class="stat">
+        <span class="stat-value">0.94</span>
+        <span class="stat-label">Mention F1</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">3</span>
+        <span class="stat-label">Models Tested</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">4</span>
+        <span class="stat-label">Aspects Detected</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">128M</span>
+        <span class="stat-label">Best Model Params</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <h2 class="section-title">Model Benchmark Results</h2>
+    <div class="models-grid">
+      <article class="model-card">
+        <h3>KcELECTRA</h3>
+        <p class="model-meta">Encoder-based Korean transformer baseline</p>
+        <div class="model-metrics">
+          <div class="metric-row"><span class="metric-name">Mention F1</span><span class="metric-value">0.91</span></div>
+          <div class="metric-row"><span class="metric-name">Sentiment F1</span><span class="metric-value">0.84</span></div>
+          <div class="metric-row"><span class="metric-name">Strength</span><span class="metric-value">Efficient</span></div>
+        </div>
+        <p class="model-desc">
+          A strong Korean-language baseline that performs well with supervised fine-tuning and relatively
+          efficient inference.
+        </p>
+      </article>
+      <article class="model-card featured">
+        <span class="model-badge">Best</span>
+        <h3>Qwen 2.5</h3>
+        <p class="model-meta">Instruction-tuned LLM for structured ABSA output</p>
+        <div class="model-metrics">
+          <div class="metric-row"><span class="metric-name">Mention F1</span><span class="metric-value">0.94</span></div>
+          <div class="metric-row"><span class="metric-name">Sentiment F1</span><span class="metric-value">0.88</span></div>
+          <div class="metric-row"><span class="metric-name">Strength</span><span class="metric-value">Flexible</span></div>
+        </div>
+        <p class="model-desc">
+          The strongest overall performer in the benchmark, especially when prompts are shaped to produce
+          clean aspect and sentiment outputs in a consistent schema.
+        </p>
+      </article>
+      <article class="model-card">
+        <h3>Prompt Pipeline</h3>
+        <p class="model-meta">Prompt-engineered extraction workflow</p>
+        <div class="model-metrics">
+          <div class="metric-row"><span class="metric-name">Mention F1</span><span class="metric-value">0.87</span></div>
+          <div class="metric-row"><span class="metric-name">Sentiment F1</span><span class="metric-value">0.81</span></div>
+          <div class="metric-row"><span class="metric-name">Strength</span><span class="metric-value">Fast iteration</span></div>
+        </div>
+        <p class="model-desc">
+          Useful for quick experimentation and schema exploration, though more sensitive to prompt phrasing
+          and formatting drift.
+        </p>
+      </article>
+    </div>
+    <div class="detail-block">
+      <h4>Benchmark Scope</h4>
+      <p>
+        The benchmark evaluates both aspect mention detection and sentiment classification, letting the
+        comparison capture extraction quality as well as sentiment understanding.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 3rem 6rem;">
+      <h2 class="section-title">Aspect Coverage</h2>
+      <div class="aspects-grid">
+        <div class="aspect-pill">FOOD</div>
+        <div class="aspect-pill">PRICE</div>
+        <div class="aspect-pill">SERVICE</div>
+        <div class="aspect-pill">AMBIENCE</div>
+      </div>
+      <div class="detail-block">
+        <h4>Why This Matters</h4>
+        <p>
+          Korean restaurant reviews often express multiple opinions in a single sentence, so the task needs
+          models that can separate aspect mentions cleanly before assigning the right sentiment label.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Technical Stack</h2>
+    <div class="tech-stack">
+      <span class="tech-tag">Transformers</span>
+      <span class="tech-tag">KcELECTRA</span>
+      <span class="tech-tag">Qwen 2.5</span>
+      <span class="tech-tag">Python</span>
+      <span class="tech-tag">Prompt Engineering</span>
+      <span class="tech-tag">Benchmarking</span>
+      <span class="tech-tag">Korean NLP</span>
+    </div>
+    <div class="detail-block">
+      <h4>Key Takeaway</h4>
+      <p>
+        The best results came from combining strong Korean-language modeling with output constraints that
+        make evaluation cleaner and reduce ambiguity in multi-aspect reviews.
+      </p>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <a href="https://github.com/ranasantosh" target="_blank" rel="noopener" class="cta-button">
+      View Code on GitHub ->
+    </a>
+  </section>
+
+  <footer class="footer" id="contact">
+    <p>Benchmarking language models for practical review understanding.</p>
+    <p style="margin-top: 1rem; opacity: 0.6;">Copyright 2026 Project Showcase</p>
+  </footer>
+</body>
+</html>

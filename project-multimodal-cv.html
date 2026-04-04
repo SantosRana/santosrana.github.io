@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Real-Time Multimodal CV System | Project Showcase</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg-dark: #0a0a0a;
+      --bg-card: #111111;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0a0;
+      --accent: #00d4ff;
+      --accent-secondary: #ff6b6b;
+      --border: #222222;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 10, 10, 0.9);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 3rem 4rem;
+      position: relative;
+      background: linear-gradient(135deg, var(--bg-dark) 0%, #0d1b2a 100%);
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .project-label {
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.03em;
+      max-width: 900px;
+    }
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin-bottom: 3rem;
+    }
+    .hero-stats { display: flex; gap: 3rem; margin-top: 2rem; flex-wrap: wrap; }
+    .stat { display: flex; flex-direction: column; }
+    .stat-value { font-size: 2.5rem; font-weight: 800; color: var(--accent); line-height: 1; }
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-top: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .section { padding: 6rem 3rem; max-width: 1200px; margin: 0 auto; }
+    .section-title { font-size: 2rem; font-weight: 700; margin-bottom: 2rem; color: var(--text-primary); }
+    .section-dark { background: var(--bg-card); max-width: none; }
+    .architecture-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin: 3rem 0; }
+    .arch-card {
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .arch-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+    .arch-card h3 { font-size: 1.25rem; margin-bottom: 1rem; color: var(--accent); }
+    .arch-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; }
+    .tech-flow { display: flex; align-items: center; gap: 1rem; margin: 1.5rem 0; flex-wrap: wrap; }
+    .tech-node {
+      background: rgba(0, 212, 255, 0.1);
+      border: 1px solid var(--accent);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      font-family: "Courier New", monospace;
+    }
+    .tech-arrow { color: var(--accent); font-size: 1.5rem; }
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin: 3rem auto;
+      max-width: 1200px;
+      padding: 0 3rem;
+    }
+    .metric-card {
+      text-align: center;
+      padding: 2rem;
+      background: var(--bg-dark);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .metric-number {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .metric-desc { color: var(--text-secondary); margin-top: 0.5rem; font-size: 0.9rem; }
+    .tech-stack { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 2rem 0; }
+    .tech-tag {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      transition: all 0.3s;
+    }
+    .tech-tag:hover {
+      background: rgba(0, 212, 255, 0.1);
+      border-color: var(--accent);
+      color: var(--text-primary);
+    }
+    .detail-block {
+      background: var(--bg-dark);
+      border-left: 3px solid var(--accent);
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .detail-block h4 {
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .detail-block p { color: var(--text-secondary); font-size: 0.95rem; }
+    .cta-section {
+      text-align: center;
+      padding: 6rem 3rem;
+      background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-dark) 100%);
+    }
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: var(--bg-dark);
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .cta-button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3); }
+    .footer {
+      padding: 3rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+    @media (max-width: 768px) {
+      .nav { padding: 1rem 1.5rem; }
+      .hero { padding: 6rem 1.5rem 3rem; }
+      .hero-stats { flex-direction: column; gap: 1.5rem; }
+      .section { padding: 4rem 1.5rem; }
+      .architecture-grid, .metrics-grid { grid-template-columns: 1fr; padding: 0 1.5rem; }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-in { animation: fadeInUp 0.8s ease-out forwards; }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-logo">Portfolio</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="project-multimodal-cv.html" class="active">CV System</a></li>
+      <li><a href="project-korean-absa.html">ABSA Benchmark</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="project-label animate-in">Project 001</div>
+    <h1 class="animate-in">Real-Time Multimodal CV System</h1>
+    <p class="hero-subtitle animate-in">
+      Dual-pipeline system combining hand gesture recognition and facial emotion recognition in a unified
+      live webcam application running at 20-30 FPS.
+    </p>
+    <div class="hero-stats animate-in">
+      <div class="stat">
+        <span class="stat-value">~95%</span>
+        <span class="stat-label">Gesture Accuracy</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">20-30</span>
+        <span class="stat-label">FPS Live</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">19K</span>
+        <span class="stat-label">MLP Params</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <h2 class="section-title">System Architecture</h2>
+    <div class="architecture-grid">
+      <div class="arch-card">
+        <h3>Hand Gesture Pipeline</h3>
+        <div class="tech-flow">
+          <span class="tech-node">MediaPipe</span>
+          <span class="tech-arrow">-&gt;</span>
+          <span class="tech-node">21 Landmarks</span>
+          <span class="tech-arrow">-&gt;</span>
+          <span class="tech-node">MLP</span>
+        </div>
+        <p>
+          A 63-dimensional normalized vector feeds a three-layer MLP for 13 gesture classes. Custom
+          multi-hand filtering logic improved reliability from 86% to about 95%.
+        </p>
+      </div>
+      <div class="arch-card">
+        <h3>Facial Emotion Pipeline</h3>
+        <div class="tech-flow">
+          <span class="tech-node">MediaPipe</span>
+          <span class="tech-arrow">-&gt;</span>
+          <span class="tech-node">468 Landmarks</span>
+          <span class="tech-arrow">-&gt;</span>
+          <span class="tech-node">GCN</span>
+        </div>
+        <p>
+          A Graph Convolutional Network uses three GCNConv layers plus global pooling. Handcrafted expression
+          features such as mouth openness, brow height, and eye openness improve classification quality.
+        </p>
+      </div>
+    </div>
+    <div class="detail-block">
+      <h4>Wave Detection Innovation</h4>
+      <p>
+        Temporal wrist trajectory tracking adds dynamic gesture detection on top of static pose recognition,
+        enabling more natural real-time interaction patterns.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <h2 class="section-title" style="padding: 0 3rem;">Performance Breakdown</h2>
+    </div>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-number">+11%</div>
+        <div class="metric-desc">GCN improvement over MLP baseline (44% to 56% accuracy)</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-number">19K</div>
+        <div class="metric-desc">Total MLP parameters with a lightweight deployment profile</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-number">7</div>
+        <div class="metric-desc">Emotion classes plus 13 gesture classes in one live system</div>
+      </div>
+    </div>
+    <div class="section" style="padding-top: 0;">
+      <div class="detail-block">
+        <h4>Why GCN Over CNN?</h4>
+        <p>
+          Modeling facial landmarks as a graph preserves structural relationships between features that raw
+          image pipelines can miss, improving emotion recognition while keeping computation low.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Technical Stack</h2>
+    <div class="tech-stack">
+      <span class="tech-tag">PyTorch</span>
+      <span class="tech-tag">MediaPipe</span>
+      <span class="tech-tag">GCN</span>
+      <span class="tech-tag">MLP</span>
+      <span class="tech-tag">OpenCV</span>
+      <span class="tech-tag">PyTorch Geometric</span>
+      <span class="tech-tag">Python</span>
+      <span class="tech-tag">Computer Vision</span>
+    </div>
+    <div class="detail-block">
+      <h4>Key Innovation</h4>
+      <p>
+        The system runs entirely on landmark geometry rather than heavy raw-image CNN processing, reducing
+        overhead while keeping the application responsive on standard webcam setups.
+      </p>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <a href="https://github.com/ranasantosh" target="_blank" rel="noopener" class="cta-button">
+      View Code on GitHub ->
+    </a>
+  </section>
+
+  <footer class="footer" id="contact">
+    <p>Built with precision. Designed for real-time performance.</p>
+    <p style="margin-top: 1rem; opacity: 0.6;">Copyright 2026 Project Showcase</p>
+  </footer>
+</body>
+</html>
