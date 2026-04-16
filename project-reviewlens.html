@@ -1,69 +1,433 @@
 <!DOCTYPE html>
-          <li>Chat-style interface with structured AI-generated summaries</li>
-          <li>Detailed breakdown of positive and negative keywords for each aspect</li>
-        </ul>
-      </div>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReviewLens - Restaurant Review Analysis System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      <div class="project-section">
-        <h2>Tech Stack</h2>
-        <div class="project-tags large-tags">
-          <span>Python</span>
-          <span>Streamlit</span>
-          <span>KcELECTRA</span>
-          <span>Qwen 2.5 7B</span>
-          <span>Ollama</span>
-          <span>PyTorch</span>
-          <span>Transformers</span>
-          <span>Naver API</span>
-          <span>Pandas</span>
-          <span>ABSA</span>
-        </div>
-      </div>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
 
-      <div class="project-section">
-        <h2>How It Works</h2>
-        <ol>
-          <li>User enters a restaurant name or review text</li>
-          <li>The system fetches reviews using the Naver Blog Search API</li>
-          <li>KcELECTRA predicts aspect mentions and sentiment polarity</li>
-          <li>Results are aggregated into FOOD, PRICE, SERVICE, and AMBIENCE</li>
-          <li>Qwen 2.5 generates explanations, summaries, and restaurant comparisons</li>
-          <li>Streamlit displays sentiment cards, and detailed keyword breakdowns</li>
-        </ol>
-      </div>
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
 
-      <div class="project-section">
-        <h2>Project Highlights</h2>
-        <div class="project-highlights">
-          <div class="highlight-item">
-            <span class="highlight-val">4</span>
-            <span class="highlight-label">Tracked Aspects</span>
-          </div>
-          <div class="highlight-item">
-            <span class="highlight-val">Local</span>
-            <span class="highlight-label">LLM Inference</span>
-          </div>
-          <div class="highlight-item">
-            <span class="highlight-val">Real Reviews</span>
-            <span class="highlight-label">Naver Data</span>
-          </div>
-        </div>
-      </div>
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
 
-      <div class="project-section">
-        <h2>Links</h2>
-        <div class="project-links">
-          <a href="https://github.com/SantosRana/ReviewLens" target="_blank" rel="noopener">
-            View GitHub Repository
-          </a>
-          <a href="#" target="_blank" rel="noopener">
-            Live Demo
-          </a>
-        </div>
-      </div>
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.3;
+            animation: moveGrid 20s linear infinite;
+        }
 
+        @keyframes moveGrid {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(20px, 20px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content-section {
+            padding: 50px 40px;
+        }
+
+        .project-section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .project-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 30px;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features-list li {
+            padding: 12px 0;
+            padding-left: 35px;
+            position: relative;
+            font-size: 1.05rem;
+            color: #444;
+            transition: all 0.3s ease;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .features-list li:hover {
+            padding-left: 40px;
+            color: #667eea;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .project-tags span {
+            background: linear-gradient(135deg, #667eea20, #764ba220);
+            color: #667eea;
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border: 2px solid #667eea40;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .project-tags span:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .large-tags span {
+            font-size: 1rem;
+            padding: 10px 20px;
+        }
+
+        .process-list {
+            counter-reset: step-counter;
+            list-style: none;
+            padding: 0;
+        }
+
+        .process-list li {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: 60px;
+            padding-top: 5px;
+            padding-bottom: 25px;
+            font-size: 1.05rem;
+            color: #444;
+        }
+
+        .process-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .process-list li::after {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 45px;
+            width: 2px;
+            height: calc(100% - 25px);
+            background: linear-gradient(180deg, #667eea40, #764ba240);
+        }
+
+        .process-list li:last-child::after {
+            display: none;
+        }
+
+        .project-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .highlight-item {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .highlight-item:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .highlight-val {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .highlight-label {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .project-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .project-links a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .project-links a::after {
+            content: '→';
+            transition: transform 0.3s ease;
+        }
+
+        .project-links a:hover::after {
+            transform: translateX(5px);
+        }
+
+        .project-links a[href="#"] {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .hero-section { padding: 40px 20px; }
+            .content-section { padding: 30px 20px; }
+            .project-highlights { grid-template-columns: 1fr; }
+            .project-links { flex-direction: column; }
+            .project-links a { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="project-icon">🔍</div>
+                <h1>ReviewLens</h1>
+                <p class="subtitle">AI-Powered Restaurant Review Analysis System</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            
+            <div class="project-section">
+                <h2>Project Overview</h2>
+                <p class="description">
+                    ReviewLens is an intelligent restaurant review analysis platform that leverages Aspect-Based Sentiment Analysis (ABSA) 
+                    and local Large Language Models to extract meaningful insights from Naver Blog restaurant reviews. 
+                    The system automatically identifies key aspects (Food, Price, Service, Ambience) and determines sentiment polarity, 
+                    providing restaurant owners and customers with actionable intelligence.
+                </p>
+            </div>
+
+            <div class="project-section">
+                <h2>Key Features</h2>
+                <ul class="features-list">
+                    <li>Aspect-Based Sentiment Analysis (ABSA) for restaurant reviews</li>
+                    <li>Real-time Naver Blog review fetching and processing</li>
+                    <li>Interactive Streamlit dashboard with visual analytics</li>
+                    <li>Chat-style interface with structured AI-generated summaries</li>
+                    <li>Detailed breakdown of positive and negative keywords for each aspect</li>
+                </ul>
+            </div>
+
+            <div class="project-section">
+                <h2>Tech Stack</h2>
+                <div class="project-tags large-tags">
+                    <span>Python</span>
+                    <span>Streamlit</span>
+                    <span>KcELECTRA</span>
+                    <span>Qwen 2.5 7B</span>
+                    <span>Ollama</span>
+                    <span>PyTorch</span>
+                    <span>Transformers</span>
+                    <span>Naver API</span>
+                    <span>Pandas</span>
+                    <span>ABSA</span>
+                </div>
+            </div>
+
+            <div class="project-section">
+                <h2>How It Works</h2>
+                <ol class="process-list">
+                    <li>User enters a restaurant name or review text</li>
+                    <li>The system fetches reviews using the Naver Blog Search API</li>
+                    <li>KcELECTRA predicts aspect mentions and sentiment polarity</li>
+                    <li>Results are aggregated into FOOD, PRICE, SERVICE, and AMBIENCE</li>
+                    <li>Qwen 2.5 generates explanations, summaries, and restaurant comparisons</li>
+                    <li>Streamlit displays charts, sentiment cards, and detailed keyword breakdowns</li>
+                </ol>
+            </div>
+
+            <div class="project-section">
+                <h2>Project Highlights</h2>
+                <div class="project-highlights">
+                    <div class="highlight-item">
+                        <span class="highlight-val">4</span>
+                        <span class="highlight-label">Tracked Aspects</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-val">Local</span>
+                        <span class="highlight-label">LLM Inference</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-val">Real Reviews</span>
+                        <span class="highlight-label">Naver Data</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-section">
+                <h2>Links</h2>
+                <div class="project-links">
+                    <a href="https://github.com/SantosRana/ReviewLens" target="_blank" rel="noopener">
+                        View GitHub Repository
+                    </a>
+                    <a href="#" target="_blank" rel="noopener">
+                        Live Demo
+                    </a>
+                </div>
+            </div>
+
+        </section>
     </div>
-  </section>
 
 </body>
 </html>
