@@ -28,14 +28,13 @@
   <section class="hero">
     <div class="hero-noise"></div>
     <div class="hero-content">
-      <p class="hero-eyebrow">Machine Learning . Computer Vision . NLP</p>
+      <p class="hero-eyebrow">Machine Learning . Computer Vision . NLP . Medical AI</p>
       <h1 class="hero-name">
         Santosh<br />
         <em>Rana</em>
       </h1>
       <p class="hero-tagline">
-        I build real-world machine learning systems
-  focusing on efficient, lightweight, and deployable solutions
+        I build real-world machine learning systems focusing on efficient, lightweight, and deployable AI agents
       </p>
       <div class="hero-cta">
         <a href="#projects" class="btn btn-primary">View Projects</a>
@@ -57,14 +56,14 @@
           into systems that can actually run in production.
         </p>
         <p>
-          My recent work spans landmark-based computer vision, multilingual aspect-based sentiment analysis,
+          My recent work spans landmark-based computer vision, medical AI assistants, aspect-based sentiment analysis,
           and real-time inference pipelines built for practical use instead of benchmark-only demos.
         </p>
         <p>
           I care about efficient architectures, clean preprocessing, honest evaluation, and the details that
           make ML systems stable outside the notebook.
         </p>
-        <a href="https://github.com/SantoshRana" class="inline-link" target="_blank" rel="noopener">
+        <a href="https://github.com/SantosRana" class="inline-link" target="_blank" rel="noopener">
           Explore my GitHub
         </a>
       </div>
@@ -74,9 +73,10 @@
   <section class="section section-dark" id="projects">
     <div class="container">
       <div class="section-label light">02 / Projects</div>
-      <h2 class="section-title light">Selected work across <em>vision</em> and <em>language</em></h2>
+      <h2 class="section-title light">Selected work across <em>vision</em>, <em>language</em>, and <em>healthcare AI</em></h2>
 
       <div class="projects-grid">
+        <!-- Project 001 -->
         <article class="project-card">
           <div class="project-num">PROJECT 001</div>
           <h3 class="project-title">Real-Time Multimodal CV System</h3>
@@ -115,6 +115,7 @@
           </div>
         </article>
 
+        <!-- Project 002 -->
         <article class="project-card">
           <div class="project-num">PROJECT 002</div>
           <h3 class="project-title">Korean ABSA Benchmark</h3>
@@ -155,7 +156,7 @@
           </div>
         </article>
 
-      <!-- Project 003 -->
+        <!-- Project 003 -->
         <article class="project-card">
           <div class="project-num">PROJECT 003</div>
           <h3 class="project-title">ReviewLens</h3>
@@ -163,7 +164,6 @@
             An AI-powered Korean restaurant review analyzer that combines Aspect-Based Sentiment Analysis,
             local LLM reasoning, and real review collection to generate structured restaurant insights.
           </p>
-        
           <div class="project-highlights">
             <div class="highlight-item">
               <span class="highlight-val">4</span>
@@ -178,13 +178,11 @@
               <span class="highlight-label">Review Fetching</span>
             </div>
           </div>
-        
           <div class="project-detail">
             <strong>Focus:</strong> Understanding FOOD, PRICE, SERVICE, and AMBIENCE sentiment from Korean
             restaurant reviews using a fine-tuned KcELECTRA model, while Qwen 2.5 generates user-friendly
             explanations and comparison summaries.
           </div>
-        
           <div class="project-tags">
             <span>ABSA</span>
             <span>KcELECTRA</span>
@@ -193,12 +191,52 @@
             <span>Streamlit</span>
             <span>Naver API</span>
           </div>
-        
           <div class="project-links">
             <a href="project-reviewlens.html">Open Project</a>
             <a href="https://github.com/SantosRana/ReviewLens" target="_blank" rel="noopener">Open Code</a>
           </div>
         </article>
+
+        <!-- Project 004 -->
+        <article class="project-card">
+          <div class="project-num">PROJECT 004</div>
+          <h3 class="project-title">MediQwen</h3>
+          <p class="project-desc">
+            A specialized clinical AI assistant that provides evidence-backed medical information extraction,
+            symptom triage, structured differential diagnosis, and medical paper analysis using fine-tuned Qwen architecture.
+          </p>
+          <div class="project-highlights">
+            <div class="highlight-item">
+              <span class="highlight-val">Fast</span>
+              <span class="highlight-label">Inference via Groq</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-val">Structured</span>
+              <span class="highlight-label">JSON Output</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-val">Clinical</span>
+              <span class="highlight-label">Safety Rules</span>
+            </div>
+          </div>
+          <div class="project-detail">
+            <strong>Focus:</strong> Combining domain-adapted LLMs, strict output formatting, safety guardrails,
+            and interactive clinical reasoning tools to support medical literature analysis and triage pipelines.
+          </div>
+          <div class="project-tags">
+            <span>Medical AI</span>
+            <span>Qwen 2.5</span>
+            <span>Groq</span>
+            <span>Pydantic</span>
+            <span>Streamlit</span>
+            <span>RAG</span>
+          </div>
+          <div class="project-links">
+            <a href="project-mediqwen.html">Open Project</a>
+            <a href="https://github.com/SantosRana/MediQwen" target="_blank" rel="noopener">Open Code</a>
+          </div>
+        </article>
+
       </div>
     </div>
   </section>
@@ -215,7 +253,6 @@
               <li>PyTorch</li>
               <li>PyTorch Geometric</li>
               <li>Scikit-learn</li>
-              <li>AdamW / optimizers</li>
               <li>Model evaluation</li>
             </ul>
           </div>
@@ -229,21 +266,21 @@
             </ul>
           </div>
           <div class="skill-group">
-            <h4>Natural Language</h4>
+            <h4>Natural Language & Medical AI</h4>
             <ul>
-              <li>Transformers</li>
-              <li>HuggingFace</li>
+              <li>Transformers / HuggingFace</li>
               <li>Aspect sentiment analysis</li>
+              <li>Clinical NLP & Triage</li>
               <li>Benchmark design</li>
-              <li>Prompt evaluation</li>
+              <li>Prompt engineering</li>
             </ul>
           </div>
           <div class="skill-group">
             <h4>LLMs & Deployment</h4>
             <ul>
-              <li>Ollama</li>
+              <li>Groq & Ollama</li>
+              <li>Structured Output (Pydantic)</li>
               <li>Streamlit</li>
-              <li>Few-shot prompting</li>
               <li>Deployment-minded prototyping</li>
             </ul>
           </div>
@@ -271,7 +308,6 @@
           I'm happy to connect.
         </p>
         <a href="mailto:ranasantosh173@gmail.com" class="btn btn-dark">Email Me</a>
-        <a href="santosh_resume.pdf" class="btn btn-dark" download style="margin-left:1rem;">Download CV ↓</a>
         <div class="contact-links">
           <a href="https://github.com/SantosRana" target="_blank" rel="noopener">GitHub</a>
           <a href="https://www.linkedin.com/in/santosh-rana-6968612ab" target="_blank" rel="noopener">LinkedIn</a>
@@ -282,4 +318,7 @@
 
   <footer class="footer">
     <span>Santosh Rana Portfolio</span>
-    <span>ML
+    <span>ML & Data Science Engineer</span>
+  </footer>
+</body>
+</html>
