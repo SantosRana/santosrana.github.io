@@ -350,49 +350,53 @@
             <div class="project-section">
                 <h2>Project Overview</h2>
                 <p class="description">
-                    ReviewLens is an intelligent restaurant review analysis platform that leverages Aspect-Based Sentiment Analysis (ABSA) 
-                    and local Large Language Models to extract meaningful insights from Naver Blog restaurant reviews. 
-                    The system automatically identifies key aspects (Food, Price, Service, Ambience) and determines sentiment polarity, 
-                    providing restaurant owners and customers with actionable intelligence.
+                    ReviewLens is an agentic restaurant review intelligence platform that leverages Aspect-Based Sentiment Analysis (ABSA) 
+                    and Groq LLMs to transform unstructured Naver Blog reviews into structured, evidence-grounded insights. 
+                    The system decomposes sentiment across core dining aspects (Food, Price, Service, Ambience) and enforces strict 
+                    verbatim quote validation to eliminate hallucinated summaries for both consumers and restaurant owners.
                 </p>
             </div>
 
             <div class="project-section">
                 <h2>Key Features</h2>
                 <ul class="features-list">
-                    <li>Aspect-Based Sentiment Analysis (ABSA) for restaurant reviews</li>
-                    <li>Real-time Naver Blog review fetching and processing</li>
-                    <li>Interactive Streamlit dashboard with visual analytics</li>
-                    <li>Chat-style interface with structured AI-generated summaries</li>
-                    <li>Detailed breakdown of positive and negative keywords for each aspect</li>
+                    <li>Aspect-Based Sentiment Analysis (ABSA) across FOOD, PRICE, SERVICE, and AMBIENCE</li>
+                    <li>Dual-Boundary Security Guardrails against prompt injections and malicious review text</li>
+                    <li>Domain Intent Routing classifying queries into CASUAL, REVIEW, FOLLOW_UP, or OFF_TOPIC</li>
+                    <li>Real-time Naver Blog Search API integration with HTML cleaning and review chunking</li>
+                    <li>100% Verbatim Quote Validation via algorithmic substring matching (Zero Hallucination)</li>
+                    <li>In-Memory State Caching (analysis_cache) enabling dynamic side-by-side restaurant comparisons</li>
+                    <li>Interactive Streamlit dashboard with bilingual conversational synthesis and structured tables</li>
                 </ul>
             </div>
 
             <div class="project-section">
                 <h2>Tech Stack</h2>
                 <div class="project-tags large-tags">
-                    <span>Python</span>
+                    <span>Python 3.10+</span>
                     <span>Streamlit</span>
-                    <span>KcELECTRA</span>
-                    <span>Qwen 2.5 7B</span>
-                    <span>Ollama</span>
-                    <span>PyTorch</span>
-                    <span>Transformers</span>
-                    <span>Naver API</span>
+                    <span>Groq API</span>
+                    <span>openai/gpt-oss-120b</span>
+                    <span>Pydantic</span>
+                    <span>Naver Search API</span>
                     <span>Pandas</span>
+                    <span>Pytest & Pytest-Cov</span>
                     <span>ABSA</span>
+                    <span>Regex & Guardrails</span>
                 </div>
             </div>
 
             <div class="project-section">
                 <h2>How It Works</h2>
                 <ol class="process-list">
-                    <li>User enters a restaurant name or review text</li>
-                    <li>The system fetches reviews using the Naver Blog Search API</li>
-                    <li>KcELECTRA predicts aspect mentions and sentiment polarity</li>
-                    <li>Results are aggregated into FOOD, PRICE, SERVICE, and AMBIENCE</li>
-                    <li>Qwen 2.5 generates explanations, summaries, and restaurant comparisons</li>
-                    <li>Streamlit displays charts, sentiment cards, and detailed keyword breakdowns</li>
+                    <li>User submits a query or raw custom review text to ReviewLens</li>
+                    <li>Boundary 1 Guardrails inspect and sanitize inputs against injection or jailbreak threats</li>
+                    <li>Domain Guard classifies prompt intent (CASUAL, REVIEW, FOLLOW_UP, OFF_TOPIC)</li>
+                    <li>The agent executes search tools to fetch live review snippets via the Naver Search API</li>
+                    <li>ABSA Orchestrator dispatches batch payloads to Groq API (gpt-oss-120b) with structured JSON schemas</li>
+                    <li>ABSA Output Validator runs substring matching checks to ensure evidence quotes are 100% verbatim</li>
+                    <li>Aspect scores and validated evidence quotes are cached in session memory (analysis_cache)</li>
+                    <li>The agent synthesizes a bilingual English explanation with Markdown comparison tables and Korean quote citations</li>
                 </ol>
             </div>
 
@@ -404,12 +408,16 @@
                         <span class="highlight-label">Tracked Aspects</span>
                     </div>
                     <div class="highlight-item">
-                        <span class="highlight-val">Local</span>
-                        <span class="highlight-label">LLM Inference</span>
+                        <span class="highlight-val">Groq</span>
+                        <span class="highlight-label">Fast Cloud Inference</span>
                     </div>
                     <div class="highlight-item">
-                        <span class="highlight-val">Real Reviews</span>
-                        <span class="highlight-label">Naver Data</span>
+                        <span class="highlight-val">100%</span>
+                        <span class="highlight-label">Verbatim Evidence</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-val">Dual</span>
+                        <span class="highlight-label">Boundary Security</span>
                     </div>
                 </div>
             </div>
@@ -423,7 +431,6 @@
                     <a href="https://drive.google.com/file/d/1hf2juKV-rgyAbUo9-NCDDF25670pEof9/preview" target="_blank" rel="noopener">
                         Live Demo
                     </a>
-
                 </div>
             </div>
 
