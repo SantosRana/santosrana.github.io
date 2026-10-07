@@ -172,7 +172,7 @@
   <div class="projects-grid">
 
 
-    <!-- ==================== PROJECT 001 ==================== -->
+  <!-- ==================== PROJECT 001 ==================== -->
 
     <article class="project-card">
 
@@ -185,10 +185,11 @@
       </h3>
 
       <p class="project-desc">
-        An offline, privacy-first multimodal clinical AI assistant
-        combining local Qwen inference, a LangGraph state-driven
-        workflow, medical RAG, risk classification, and deterministic
-        safety guardrails.
+        An offline, privacy-first multimodal clinical assistant for
+        low-resource and off-grid settings. Powered by Qwen 3.5 on
+        local Ollama inference, and built as a LangGraph finite state
+        machine with BGE scope classification, hybrid medical RAG,
+        four-tier risk triage, and multi-layer safety guardrails.
       </p>
 
       <div class="project-highlights">
@@ -204,19 +205,19 @@
 
         <div class="highlight-item">
           <span class="highlight-val">
-            RAG
+            FSM
           </span>
           <span class="highlight-label">
-            Medical Knowledge
+            Safety Routing
           </span>
         </div>
 
         <div class="highlight-item">
           <span class="highlight-val">
-            FSM
+            4
           </span>
           <span class="highlight-label">
-            Safety Routing
+            Risk Tiers
           </span>
         </div>
 
@@ -225,22 +226,26 @@
       <div class="project-detail">
 
         <strong>Focus:</strong>
-        Building a safety-aware clinical AI pipeline with
-        multimodal input handling, risk classification,
-        retrieval-grounded responses, emergency escalation,
-        prompt-injection protection, and controlled local
-        LLM generation.
+        Designed for remote regions with limited clinicians and no
+        internet, such as rural Nepal. Combines deterministic
+        guardrails that run before any LLM call, BGE-based scope
+        gating, multimodal clinical image handling, emergency
+        escalation, and retrieval-grounded responses over a local
+        ChromaDB knowledge base with an optional trusted web fallback.
 
       </div>
 
       <div class="project-tags">
-        <span>Qwen</span>
+        <span>Qwen 3.5</span>
+        <span>Ollama</span>
         <span>LangGraph</span>
         <span>RAG</span>
         <span>ChromaDB</span>
+        <span>BGE Embeddings</span>
         <span>Guardrails</span>
         <span>Multimodal AI</span>
-        <span>Local AI</span>
+        <span>FastAPI</span>
+        <span>Streamlit</span>
       </div>
 
       <div class="project-links">
